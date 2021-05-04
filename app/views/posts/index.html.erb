@@ -1,19 +1,11 @@
 <h1>Posts</h1>
 
-<% if user_signed_in? %>
-<p>You are signed in as <%= current_user.email%>.</p>
-<%= link_to 'Sign out', destroy_user_session_path, method: :delete%>
-<% else %>
-<%= link_to 'Sign in', new_user_session_path%>
-<%= link_to 'Sign up', new_user_registration_path%>
-<% end %>
+
 
 <table>
   <thead>
     <tr>
-      <% if user_signed_in?%>
-      <th>Author</th>
-      <% end%>
+      <th><%= display_author%></th>
       <th>Body</th>
       <th colspan="3"></th>
     </tr>
@@ -22,13 +14,8 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-      <% if user_signed_in?%>
-        <td><%= User.all.find_by_id(post.user_id).email %></td>
-      <% end %>
+        <td><%= user_email(post) %></td>
         <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
