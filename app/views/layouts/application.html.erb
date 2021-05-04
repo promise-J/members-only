@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Railsssss</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if notice %>
+    <p class="notice" id="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+    <p class="alert"><%= alert %></p>
+    <% end %>
+    <% if user_signed_in? %>
+    <p>You are signed in as <%= current_user.email%>.</p>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+
+    <% else %>
+    <%= link_to 'Sign in', new_user_session_path%>
+    <%= link_to 'Sign up', new_user_registration_path%>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
